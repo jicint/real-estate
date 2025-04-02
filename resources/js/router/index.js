@@ -1,13 +1,18 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
-import PropertyList from '../components/properties/PropertyList.vue';
-import PropertyDetail from '../components/properties/PropertyDetail.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import PropertyList from '../Components/properties/PropertyList.vue';
 import MapView from '../Components/properties/MapView.vue';
+import PropertyContainer from '../Components/properties/PropertyContainer.vue';
+import PropertyDetail from '../components/properties/PropertyDetail.vue';
 
 const routes = [
   {
     path: '/',
+    redirect: '/properties'
+  },
+  {
+    path: '/properties',
     name: 'properties',
-    component: PropertyList
+    component: () => import('../Components/properties/PropertyContainer.vue')
   },
   {
     path: '/properties/:id',
@@ -16,17 +21,16 @@ const routes = [
   },
   {
     path: '/compare/:token',
-    component: MapView,
-    props: true
+    component: PropertyContainer
   },
   {
     path: '/:pathMatch(.*)*',
-    redirect: '/'
+    redirect: '/properties'
   }
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 });
 

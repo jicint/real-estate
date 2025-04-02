@@ -39,9 +39,9 @@ Route::get('/compare/{token}', function ($token) {
 })->where('token', '.+');
 
 // This should be the last route
-Route::get('/{path?}', function () {
+Route::get('/{any}', function () {
     return view('welcome');
-})->where('path', '.*');
+})->where('any', '.*');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
